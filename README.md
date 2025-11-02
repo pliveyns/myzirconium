@@ -1,8 +1,9 @@
 # myzirconium &nbsp; [![bluebuild build badge](https://github.com/pliveyns/myzirconium/actions/workflows/build.yml/badge.svg)](https://github.com/pliveyns/myzirconium/actions/workflows/build.yml)
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+My customized Fedora Atomic image with niri TWM based on Zirconium.
+See [Zirconium] for the base image.
 
-After setup, it is recommended you update this README to describe your custom image.
+See cwalsothe [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository.
 
 ## Installation
 
@@ -29,10 +30,6 @@ To rebase an existing atomic Fedora installation to the latest build:
   ```
 
 The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
-
-## ISO
-
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
 
 ## Verification
 
