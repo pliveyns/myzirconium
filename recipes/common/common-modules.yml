@@ -1,0 +1,42 @@
+modules:
+
+  - type: files
+    files:
+      - source: system
+        destination: /
+
+  - type: script
+    snippets:
+      - "dnf5 install -y 'dnf5-command(copr)'"
+
+  - type: containerfile
+    snippets:
+      - RUN rpm-ostree install just powerstat
+      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-udev-rules.noarch.rpm /
+      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-update-services.noarch.rpm /
+      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-signing.noarch.rpm /
+      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-luks.noarch.rpm /
+      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-just.noarch.rpm /
+      - RUN rpm -ivh /ublue-os-udev-rules.noarch.rpm
+      - RUN rpm -ivh /ublue-os-update-services.noarch.rpm
+      - RUN rpm -ivh /ublue-os-signing.noarch.rpm
+      - RUN rpm -ivh /ublue-os-luks.noarch.rpm
+      - RUN rpm -ivh /ublue-os-just.noarch.rpm
+
+  - type: dnf
+    #source: ghcr.io/blue-build/modules/dnf:dnf-module
+    install:
+      packages:
+        #- langpacks-en
+        - langpacks-en_GB
+        - alacritty
+        #- gparted
+        - syncthing
+        - fzf
+        - distrobox
+        #- gnome-software    # Needed for default flatpaks v2 ??
+    remove:
+      packages:
+        - firefox
+        - firefox-langpacks
+
