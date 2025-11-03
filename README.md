@@ -12,19 +12,11 @@ See cwalsothe [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick s
 
 To rebase an existing atomic Fedora installation to the latest build:
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
+- To rebase from some flavour of Fedora Atomic installed:
   ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/pliveyns/myzirconium:latest
+  sudo bootc switch ghcr.io/pliveyns/myzirconium
   ```
 - Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/pliveyns/myzirconium:latest
-  ```
-- Reboot again to complete the installation
   ```
   systemctl reboot
   ```
