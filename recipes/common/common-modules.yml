@@ -5,36 +5,49 @@ modules:
       - source: system
         destination: /
 
-  - type: script
-    snippets:
-      - "dnf5 install -y 'dnf5-command(copr)'"
+#  - type: script
+#    snippets:
+#      - "dnf5 install -y 'dnf5-command(copr)'"
 
-  - type: containerfile
-    snippets:
-      - RUN rpm-ostree install just powerstat
-      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-udev-rules.noarch.rpm /
-      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-update-services.noarch.rpm /
-      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-signing.noarch.rpm /
-      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-luks.noarch.rpm /
-      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-just.noarch.rpm /
-      - RUN rpm -ivh /ublue-os-udev-rules.noarch.rpm
-      - RUN rpm -ivh /ublue-os-update-services.noarch.rpm
-      - RUN rpm -ivh /ublue-os-signing.noarch.rpm
-      - RUN rpm -ivh /ublue-os-luks.noarch.rpm
-      - RUN rpm -ivh /ublue-os-just.noarch.rpm
+#  - type: containerfile
+#    snippets:
+#      - RUN rpm-ostree install just powerstat
+#      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-udev-rules.noarch.rpm /
+#      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-update-services.noarch.rpm /
+#      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-signing.noarch.rpm /
+#      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-luks.noarch.rpm /
+#      - COPY --from=ghcr.io/ublue-os/config:latest /rpms/ublue-os-just.noarch.rpm /
+#      - RUN rpm -ivh /ublue-os-udev-rules.noarch.rpm
+#      - RUN rpm -ivh /ublue-os-update-services.noarch.rpm
+#      - RUN rpm -ivh /ublue-os-signing.noarch.rpm
+#      - RUN rpm -ivh /ublue-os-luks.noarch.rpm
+#      - RUN rpm -ivh /ublue-os-just.noarch.rpm
 
+# Universal Blue packages
   - type: dnf
-    #source: ghcr.io/blue-build/modules/dnf:dnf-module
+    repos:
+      copr: 
+        - ublue-os/packages
     install:
       packages:
-        #- langpacks-en
+        - uupd
+        - ublue-setup-services
+        - ublue-os-udev-rules
+        - ublue-os-signing
+        - ublue-os-luks
+        - ublue-os-just
+
+  - type: dnf
+    install:
+      packages:
         - langpacks-en_GB
         - alacritty
         #- gparted
         - syncthing
         - fzf
         - distrobox
-        #- gnome-software    # Needed for default flatpaks v2 ??
+        - just
+        - powerstat
     remove:
       packages:
         - firefox
