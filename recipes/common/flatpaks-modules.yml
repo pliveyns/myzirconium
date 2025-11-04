@@ -1,0 +1,12 @@
+modules:
+  - type: default-flatpaks
+    configurations:
+      - scope: user
+        notify: true
+        install:
+          # Internet
+          - org.mozilla.firefox
+          - io.gitlab.librewolf-community
+          - org.filezillaproject.Filezilla
+          #- nz.mega.MEGAsync
+
