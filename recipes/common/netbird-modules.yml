@@ -1,0 +1,16 @@
+modules:
+  - type: dnf
+    repos:
+      files:
+        - netbird.repo
+    install:
+      packages:
+        - netbird
+        - libappindicator-gtk3
+        - libappindicator
+        - netbird-ui
+  - type: systemd
+    system:
+      enabled:
+        - netbird.service
+
